@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+
+{% block body %}
+<h1>Welcome, admin</h1>
+<a href="{% url 'web:logout_user' %}">logout</a>
+<hr>
+
+<h1>Upload content for courses</h1>
+<ul>
+	<li><a href="{% url 'web:upload_course_content' 'neet' %}">NEET</a></li>
+	<li><a href="{% url 'web:upload_course_content' 'jee' %}">JEE</a></li>
+	<li><a href="{% url 'web:upload_course_content' 'SSC' %}">SSC</a></li>
+</ul>
+
+{% endblock %}

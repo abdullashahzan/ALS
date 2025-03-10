@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Your course
+{% endblock %}
+
+
+{% block body %}
+{% if message %}
+<p>{{message}}</p>
+{% endif %}
+{% if status == 'admin' %}
+<h1>Upload content for {{course}}</h1>
+<hr>
+<form action="{% url 'web:upload_course_content' course %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label for="file">Choose a file:</label>
+    <input type="file" name="file" id="file" required>
+    <p>Only PDF format is valid</p>
+    
+    <br><br>
+    <input type="submit" value="Upload">
+</form>
+<a href="{% url 'web:admin_page' %}">Home</a>
+{% else %}
+<h1>{{course}}</h1>
+<hr>
+<ul>
+	<li>
+		<a href="{% url 'web:generate_question' course %}">Adaptive question bank</a>
+		<p>Learn new questions which our AI thinks you are weak in</p>
+	</li>
+	<li>
+		<a href="{% url 'web:saved_questions' %}">Saved questions</a>
+		<p>Review and practice your saved questions</p>
+	</li>
+	<li>
+		<a href="{% url 'web:mock_exam' course %}">Adaptive performance improvement</a>
+		<p>Let AI generate tests for you to improve your weak points</p>
+	</li>
+</ul>
+<a href="{% url 'web:index' %}">Home</a>
+{% endif %}
+{% endblock %}

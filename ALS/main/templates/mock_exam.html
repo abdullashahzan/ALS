@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Mock exam
+{% endblock %}
+
+
+{% block body %}
+<h1>{{course_name}} mock exam</h1>
+<hr>
+{% if message %}
+<h1>{{message}}</h1>
+<p>AI response: {{ai_response}}</p>
+<p>Your weak points: {{weak_points}}</p>
+<a href="{% url 'web:mock_exam' course_name %}" class="btn btn-primary">Generate another question</a>
+<a href="{% url 'web:index' %}" class="btn btn-light">Home</a>
+{% else %}
+<form action="{% url 'web:mock_exam' course_name %}" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="user_question" value="{{ question }}">
+	<p class="lead">{{question}}</p>
+	<textarea placeholder="Type your answer here..." name="user_answer"></textarea>
+	<br>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endif %}
+{% endblock %}

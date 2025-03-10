@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Your course
+{% endblock %}
+
+
+{% block body %}
+{% if all_questions %}
+{% for question in all_questions %}
+<p>{{question}}</p>
+<hr>
+{% empty %}
+<p>You have not saved any questions yet.</p>
+{% endfor %}
+{% else %}
+<form action="{% url 'web:generate_question' course %}" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="save_question" value="{{question}}">
+	<p>{{question}}</p>
+	<input type="submit" value="Save question" class="btn btn-primary">
+	<a href="{% url 'web:generate_question' course %}" class="btn btn-light">Generate another question</a>
+	<a href="{% url 'web:index' %}" class="btn btn-light">Home</a>
+</form>
+{% endif %}
+
+{% endblock %}

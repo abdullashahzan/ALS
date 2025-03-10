@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Your answer
+{% endblock %}
+
+
+{% block body %}
+<h1>Your test results:</h1>
+{% if question.correct %}
+<p>Correct answer</p>
+{% else %}
+<p>Wrong answer</p>
+{% endif %}
+<hr>
+<p>Question: {{question.question}}</p>
+<p>Your answer: {{question.answer}}</p>
+<p>AI response: {{question.suggestion}}</p>
+<hr>
+<p>Your weak points from this question: {{question.weak_points}}</p>
+{% endblock %}

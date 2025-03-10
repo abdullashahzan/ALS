@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Chat
+{% endblock %}
+
+
+{% block body %}
+<h1>Chat with AI</h1>
+<hr>
+<div class="chat-container">
+    <div class="chat-header">
+        Chatbot
+    </div>
+    <div class="chat-box" id="chat-box">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+<script>
+    function sendMessage() {
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        // Get the user's message
+        const userMessage = userInput.value.trim();
+        if (!userMessage) return;
+
+        // Add the user's message to the chat box
+        const userMessageElement = document.createElement('div');
+        userMessageElement.className = 'message user-message';
+        userMessageElement.textContent = userMessage;
+        chatBox.appendChild(userMessageElement);
+
+        // Clear the input field
+        userInput.value = '';
+
+        // Simulate the chatbot's response
+        const botMessage = "hello, world!";
+        const botMessageElement = document.createElement('div');
+        botMessageElement.className = 'message bot-message';
+        botMessageElement.textContent = botMessage;
+        chatBox.appendChild(botMessageElement);
+
+        // Scroll to the bottom of the chat box
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+{% endblock %}

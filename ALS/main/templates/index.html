@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+
+{% block body %}
+<h1>Welcome, {{user.username}}</h1>
+<p>Course(s) completion progress: {{current_user.progress}}%</p>
+<a href="{% url 'web:logout_user' %}">logout</a>
+<hr>
+
+<h1>Your courses</h1>
+<ul>
+{% for course in courses %}
+<li><a href="{% url 'web:show_course' course %}">{{course}}</a></li>
+{% empty %}
+<li>You did not select any course</li>
+{% endfor %}
+</ul>
+<hr>
+
+<h1>Chat with AI</h1>
+<p>Ask AI to help you study or to strengthen your weak points or to clear any doubts.</p>
+<a href="{% url 'web:chat' %}" class="btn btn-light">Let's study</a>
+<hr>
+
+<h1>Your previous tests</h1>
+<ul>
+{% for history in user_history %}
+<li><a href="{% url 'web:show_mock_exam' history.id %}">{{history.question}}</a></li>
+{% empty %}
+<p>You have not attempted any tests yet</p>
+{% endfor %}
+</ul>
+<hr>
+
+<h1>Your weak points</h1>
+<p>What our AI thinks you should improve.</p>
+<ul>
+{% for weak_point in weak_points %}
+<li>{{weak_point}}</li>
+{% empty %}
+<p>You do not have any thing to work on right now :)</p>
+{% endfor %}
+</ul>
+<hr>
+
+<h1>AI based predictions</h1>
+<p>Your predicted scores based on your performance: {{current_user.predicted_grades}}%</p>
+{% endblock %}

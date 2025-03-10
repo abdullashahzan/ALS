@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Sign up
+{% endblock %}
+
+{% block body %}
+<form action="/signup" method="POST">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="password">Select courses:</label><br>
+            
+    <label>
+        <input type="checkbox" name="courses" value="ssc">
+        SSC
+    </label><br>
+    
+    <label>
+        <input type="checkbox" name="courses" value="ias">
+        IAS
+    </label><br>
+    
+    <label>
+        <input type="checkbox" name="courses" value="neet">
+        NEET
+    </label><br>
+    
+    <label>
+        <input type="checkbox" name="courses" value="cat">
+        CAT
+    </label><br>
+    
+    <label>
+        <input type="checkbox" name="courses" value="gat">
+        GAT
+    </label><br>
+    
+    <label>
+        <input type="checkbox" name="courses" value="jee">
+        JEE
+    </label><br>
+<br><br>
+    
+    <input type="submit" value="Sign up">
+</form>
+<p>Already have an account? <a href="{% url 'web:login_user' %}">Login</a></p>
+{% endblock %}
